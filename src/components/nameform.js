@@ -3,6 +3,7 @@
 // https://www.netlify.com/blog/2017/07/20/how-to-integrate-netlifys-form-handling-in-a-react-app/
 
 import React, { useState } from "react";
+import { navigate } from "gatsby"
 
 const NameForm = (props) => {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ const NameForm = (props) => {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(createFormDataObj(data)).toString()
       })
-        .then(() => alert(`Submitting Name ${name}`))
+        .then(() => navigate("/thank-you/"))
         .catch(error => alert(error));
       
       e.preventDefault();
