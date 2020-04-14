@@ -20,11 +20,10 @@ const NameForm = (props) => {
     return formData
   }
   
-  const handleChange = (e) => {
+  const handleChange = (evt) => {
     const value =
       evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
-    setState({
-      ...state,
+    setName({
       [evt.target.name]: value
     });
   }
@@ -55,7 +54,7 @@ const NameForm = (props) => {
           name="firstName"
           type="text"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -64,11 +63,12 @@ const NameForm = (props) => {
           name="animal[]"
           type="checkbox"
           value={name}
-          onChange={e => setName(e.target.value)}
-        />
-          <option value={name}>emu</option>
-          <option value={name}>elephant</option>
-          <option value={name}>turtle</option>
+          multiple={true}
+          onChange={handleChange}
+        >
+          <option value="emu">emu</option>
+          <option value="elephant">elephant</option>
+          <option value="turtle">turtle</option>
         </select>
       </label>
       <input type="submit" value="Submit" />
