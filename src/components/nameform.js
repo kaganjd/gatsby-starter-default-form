@@ -20,11 +20,20 @@ const NameForm = (props) => {
     return formData
   }
   
+  const handleChange = (e) => {
+    const value =
+      evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value
+    });
+  }
+
   const handleSubmit = (e) => {
     // This `data` object is what's passed to the createFormDataObj. It needs all of your form fields, where the key is the name= attribute and the value is the value=
     const data = { 
       "form-name": "contact",
-      "name": name
+      ...state
     }
     // This POSTs your encoded form to Netlify with the required headers (for text; headers will be different for POSTing a file) and, on success, redirects to the custom success page using Gatsby's `navigate` helper function that we imported at the top
     fetch("/", {
@@ -48,6 +57,19 @@ const NameForm = (props) => {
           value={name}
           onChange={e => setName(e.target.value)}
         />
+      </label>
+      <label>
+        Fav animal:
+        <select
+          name="animal[]"
+          type="checkbox"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+          <option value={name}>emu</option>
+          <option value={name}>elephant</option>
+          <option value={name}>turtle</option>
+        </select>
       </label>
       <input type="submit" value="Submit" />
     </form>
